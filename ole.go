@@ -31,6 +31,7 @@ func Open(reader io.ReadSeeker, charset string) (ole *Ole, err error) {
 		ole.header = header
 		ole.Lsector = 512 //TODO
 		ole.Lssector = 64 //TODO
+		fmt.Println("Reading msat")
 		err = ole.readMSAT()
 		fmt.Println("Success open")
 		return ole, err
