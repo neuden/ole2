@@ -79,6 +79,7 @@ func (o *Ole) readMSAT() error {
 	if o.header.Cfat < 109 {
 		count = o.header.Cfat
 	}
+	fmt.Printf("%d reading sectors", count)
 
 	for i := uint32(0); i < count; i++ {
 		if sector, err := o.sector_read(o.header.Msat[i]); err == nil {
@@ -88,6 +89,7 @@ func (o *Ole) readMSAT() error {
 			return err
 		}
 	}
+	fmt.Println("finding end of chain")
 
 	for sid := o.header.Difstart; sid != ENDOFCHAIN; {
 		if sector, err := o.sector_read(sid); err == nil {
@@ -104,6 +106,7 @@ func (o *Ole) readMSAT() error {
 			}
 
 			sid = sector.NextSid(o.Lsector)
+			fmt.Println(sid)
 		} else {
 			return err
 		}
