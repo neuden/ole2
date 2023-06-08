@@ -2,7 +2,8 @@ package ole2
 
 import (
 	"encoding/binary"
-	"io"
+	"io",
+	"fmt"
 )
 
 var ENDOFCHAIN = uint32(0xFFFFFFFE) //-2
@@ -42,6 +43,7 @@ func (o *Ole) ListDir() (dir []*File, err error) {
 		d := new(File)
 		err = binary.Read(sector, binary.LittleEndian, d)
 		if err == nil && d.Type != EMPTY {
+			fmt.Println(d.Type)
 			dir = append(dir, d)
 		} else {
 			break
