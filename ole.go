@@ -32,16 +32,18 @@ func Open(reader io.ReadSeeker, charset string) (ole *Ole, err error) {
 		ole.Lsector = 512 //TODO
 		ole.Lssector = 64 //TODO
 		err = ole.readMSAT()
+		fmt.Println("Success open")
 		return ole, err
 	}
-
+	fmt.Println("open failure")
 	return nil, err
 }
 
 func (o *Ole) ListDir() (dir []*File, err error) {
+	fmt.Println("Listing dir")
+
 	sector := o.stream_read(o.header.Dirstart, 0)
 	dir = make([]*File, 0)
-	fmt.Println("Listing dir")
 
 	for {
 		d := new(File)
