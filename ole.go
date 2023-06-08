@@ -115,7 +115,7 @@ func (o *Ole) readMSAT() error {
 	for i := uint32(0); i < o.header.Csfat; i++ {
 		sid := o.header.Sfatstart
 
-		if sid != ENDOFCHAIN && sid != FREESECT; {
+		if sid != ENDOFCHAIN && sid != FREESECT {
 			if sector, err := o.sector_read(sid); err == nil {
 				sids := sector.MsatValues(o.Lsector)
 
