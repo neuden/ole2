@@ -23,6 +23,8 @@ func Open(reader io.ReadSeeker, charset string) (ole *Ole, err error) {
 	var header *Header
 	var hbts = make([]byte, 512)
 	reader.Read(hbts)
+	fmt.Println("Open")
+
 	if header, err = parseHeader(hbts); err == nil {
 		ole = new(Ole)
 		ole.reader = reader
@@ -39,6 +41,8 @@ func Open(reader io.ReadSeeker, charset string) (ole *Ole, err error) {
 func (o *Ole) ListDir() (dir []*File, err error) {
 	sector := o.stream_read(o.header.Dirstart, 0)
 	dir = make([]*File, 0)
+	fmt.Println("Listing dir")
+
 	for {
 		d := new(File)
 		err = binary.Read(sector, binary.LittleEndian, d)
