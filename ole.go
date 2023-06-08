@@ -2,7 +2,7 @@ package ole2
 
 import (
 	"encoding/binary"
-	"io",
+	"io"
 	"fmt"
 )
 
